@@ -241,7 +241,7 @@ public class AddDonor extends javax.swing.JFrame {
 
     private void addDonorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDonorActionPerformed
         // TODO add your handling code here:
-        int donorId = 1;
+       
         String donorname = name.getText();
         String donoremail = email.getText();
         String donorphone = phone.getText();

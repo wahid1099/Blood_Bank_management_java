@@ -285,6 +285,34 @@ public class UpdateDonor extends javax.swing.JFrame {
 
     private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
         // TODO add your handling code here:
+
+        String donorname = name.getText();
+        String donoremail = email.getText();
+        String donorphone = phoneno.getText();
+        String donoradress = address.getText();
+        String donorcity = phoneno.getText();
+        String donorgender = (String) gender.getSelectedItem();
+
+        String donorbloodgrp = bloodgrp.getText();
+        String donordob = dob.getText();
+
+        String donation_date = donationdate.getText();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Diu_projects", "wahid", "Wahid@#81");
+            Statement st = connection.createStatement();
+
+            String query = "UPDATE donor SET  donor_name='" + donorname + "',email='" + donoremail + "',phone_no='" + donorphone + "',address='"
+                    + donoradress + "',city='" + donorcity + "',gender='" + donorgender + "',blood_group='" + donorbloodgrp + "',dob='" + donordob + "',donation_date='" + donation_date + "' where email='" + donoremail + "' ";
+
+            st.executeUpdate(query);
+            JOptionPane.showMessageDialog(null, "Donor data updated sucessfully");
+
+            setVisible(false);
+            new UpdateDonor().setVisible(true);
+        } catch (HeadlessException | SQLException e) {
+            System.out.println("error" + e);
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_updatebtnActionPerformed
 
     /**

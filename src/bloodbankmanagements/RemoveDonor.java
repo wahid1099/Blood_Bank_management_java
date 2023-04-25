@@ -4,6 +4,14 @@
  */
 package bloodbankmanagements;
 
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author wahid
@@ -26,6 +34,7 @@ public class RemoveDonor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        iddonor = new javax.swing.JLabel();
         Homepage = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -35,20 +44,20 @@ public class RemoveDonor extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        bloodgrp = new javax.swing.JLabel();
+        lastblood = new javax.swing.JLabel();
+        dob = new javax.swing.JLabel();
+        adress = new javax.swing.JLabel();
+        phone = new javax.swing.JLabel();
+        donoremail = new javax.swing.JLabel();
+        donorname = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        searchdonorbtn = new javax.swing.JButton();
+        searchbox = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         Removedonor = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        donorid = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -58,6 +67,10 @@ public class RemoveDonor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        iddonor.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        iddonor.setText("null");
+        getContentPane().add(iddonor, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 150, -1));
 
         Homepage.setBackground(new java.awt.Color(0, 51, 51));
         Homepage.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
@@ -103,59 +116,51 @@ public class RemoveDonor extends javax.swing.JFrame {
         jLabel7.setText("Blood Group:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 511, 169, 43));
 
-        jLabel16.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel16.setText("jLabel10");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 518, 174, -1));
+        bloodgrp.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        getContentPane().add(bloodgrp, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 518, 174, -1));
 
-        jLabel18.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel18.setText("jLabel10");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 473, 174, -1));
+        lastblood.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        getContentPane().add(lastblood, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 473, 174, -1));
 
-        jLabel17.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel17.setText("jLabel10");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 424, 174, -1));
+        dob.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        getContentPane().add(dob, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 424, 174, -1));
 
-        jLabel12.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel12.setText("jLabel10");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 375, 174, -1));
+        adress.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        getContentPane().add(adress, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 375, 174, -1));
 
-        jLabel15.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel15.setText("jLabel10");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 326, 174, -1));
+        phone.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        getContentPane().add(phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 326, 174, -1));
 
-        jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel13.setText("jLabel10");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 277, 174, -1));
+        donoremail.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        getContentPane().add(donoremail, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 267, 510, 40));
 
-        jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel10.setText("jLabel10");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 228, 174, -1));
+        donorname.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        getContentPane().add(donorname, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 228, 174, -1));
 
         jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel11.setText("jLabel10");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 179, 781, -1));
 
-        jButton1.setBackground(new java.awt.Color(102, 0, 0));
-        jButton1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search1.png"))); // NOI18N
-        jButton1.setText("Search Donor");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        searchdonorbtn.setBackground(new java.awt.Color(102, 0, 0));
+        searchdonorbtn.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        searchdonorbtn.setForeground(new java.awt.Color(255, 255, 255));
+        searchdonorbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/search1.png"))); // NOI18N
+        searchdonorbtn.setText("Search Donor");
+        searchdonorbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                searchdonorbtnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(717, 90, -1, -1));
+        getContentPane().add(searchdonorbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(717, 90, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(255, 51, 0));
-        jTextField1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        searchbox.setBackground(new java.awt.Color(255, 51, 0));
+        searchbox.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        searchbox.setForeground(new java.awt.Color(255, 255, 255));
+        searchbox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                searchboxActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 90, 466, -1));
+        getContentPane().add(searchbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 90, 466, -1));
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 0, 0));
@@ -167,13 +172,18 @@ public class RemoveDonor extends javax.swing.JFrame {
         Removedonor.setForeground(new java.awt.Color(255, 255, 255));
         Removedonor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete.png"))); // NOI18N
         Removedonor.setText("Remove Donor");
+        Removedonor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemovedonorActionPerformed(evt);
+            }
+        });
         getContentPane().add(Removedonor, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 570, 293, -1));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/all page background image.png"))); // NOI18N
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, -1, -1));
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/all page background image.png"))); // NOI18N
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        donorid.setIcon(new javax.swing.ImageIcon(getClass().getResource("/all page background image.png"))); // NOI18N
+        getContentPane().add(donorid, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/all page background image.png"))); // NOI18N
         getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, -1, -1));
@@ -199,17 +209,55 @@ public class RemoveDonor extends javax.swing.JFrame {
     private void HomepageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomepageActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        HomePage hm=new HomePage();
+        HomePage hm = new HomePage();
         hm.setVisible(true);
     }//GEN-LAST:event_HomepageActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void searchboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchboxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_searchboxActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void searchdonorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchdonorbtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String searchmail = searchbox.getText();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Diu_projects", "wahid", "Wahid@#81");
+            Statement st = connection.createStatement();
+
+            ResultSet rt = st.executeQuery("select * from donor where email='" + searchmail + "'");
+            if (rt.next()) {
+                iddonor.setText(rt.getString(1));
+                donoremail.setText(rt.getString(3));
+                phone.setText(rt.getString(4));
+                bloodgrp.setText(rt.getString(8));
+                adress.setText(rt.getString(5));
+
+                dob.setText(rt.getString(9));
+                lastblood.setText(rt.getString(10));
+                donorname.setText(rt.getString(2));
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Donor not found");
+
+            }
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_searchdonorbtnActionPerformed
+
+    private void RemovedonorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemovedonorActionPerformed
+        String searchmail = searchbox.getText();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Diu_projects", "wahid", "Wahid@#81");
+            Statement st = connection.createStatement();
+            st.executeUpdate("delete from donor where email='"+searchmail+"'");
+            JOptionPane.showMessageDialog(null, "Donor Removed sucessfully!");
+            setVisible(false);
+            new RemoveDonor().setVisible(true);
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_RemovedonorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,18 +297,16 @@ public class RemoveDonor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Homepage;
     private javax.swing.JButton Removedonor;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel adress;
+    private javax.swing.JLabel bloodgrp;
+    private javax.swing.JLabel dob;
+    private javax.swing.JLabel donoremail;
+    private javax.swing.JLabel donorid;
+    private javax.swing.JLabel donorname;
+    private javax.swing.JLabel iddonor;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -275,6 +321,9 @@ public class RemoveDonor extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lastblood;
+    private javax.swing.JLabel phone;
+    private javax.swing.JTextField searchbox;
+    private javax.swing.JButton searchdonorbtn;
     // End of variables declaration//GEN-END:variables
 }
