@@ -7,6 +7,7 @@ package bloodbankmanagements;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,15 +15,16 @@ import java.util.logging.Logger;
  */
 public class connectiondb {
 
-    public static Connection getCon() throws SQLException {
-        try {
-            Class.forName("com.mysql.jbdc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Diu_projects", "wahid", "Wahid@#81");
+  Connection con = null;
+    public static Connection connectDB(){
+        try {           
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con  = DriverManager.getConnection("jdbc:mysql://localhost/Diu_projects","wahid","Wahid@#81");
+            JOptionPane.showMessageDialog(null,"connected");
             return con;
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Database connection failed " );
             return null;
-
-        } 
-
-    }
+    }  
+  }
 }

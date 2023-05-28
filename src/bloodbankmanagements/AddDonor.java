@@ -117,7 +117,7 @@ public class AddDonor extends javax.swing.JFrame {
         getContentPane().add(Homepagebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 600, 280, 40));
 
         name.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(542, 121, 280, -1));
+        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, 280, -1));
 
         email.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         getContentPane().add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(542, 169, 280, -1));
